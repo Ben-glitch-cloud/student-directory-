@@ -1,12 +1,25 @@
-#lets pu all students into an arrey
-puts ("The student of Villains Academy")
-puts ("------------")
+
+
 students = ["Dr. Hannibal Lecter", "Darth Varder", "Nurse Ratched",
-  "Micheal Corleone", "Alex DeLarge", "The Wiched Witch of the West",
+"Micheal Corleone", "Alex DeLarge", "The Wiched Witch of the West",
 "Terminator", "Freddy Krueger", "The Joker", "Joffrey Baratheon", "Norman Bates"]
-students.each do |stu|
-  puts stu
+
+def print_header
+  puts ("The student of Villains Academy")
+  puts ("------------")
 end
-# and then print them
-puts "Overall, we have #{students.count} great students"
-#finally, we printthe total
+
+def print(names)
+names.each do |names|
+  puts names
+end
+end
+
+def print_footer(names)
+  puts "Overall, we have #{names.count} great students"
+end
+
+
+print_header
+print(students)
+print_footer(students)
