@@ -14,6 +14,8 @@ students = [
 {name: "Norman Bates", cohort: :november}
 ]
 
+
+
 def input_students
   puts "Please enter the names of the studets"
   puts "To finish, just hit thr return twice"
@@ -27,14 +29,9 @@ def input_students
   students
 end
 
-def print_header
-  puts ("The student of Villains Academy")
-  puts ("------------")
-end
-
 def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]})"
+  @students.each_with_index do |student, index|
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
   end
 end
 
@@ -42,7 +39,35 @@ def print_footer(names)
   puts "Overall, we have #{names.count} great students"
 end
 
-students = input_students
-print_header
-print(students)
-print_footer(students)
+def print_header
+  puts ("The student of Villains Academy")
+  puts ("------------")
+end
+
+def interactive_menu
+  loop do
+    print_menu
+    process(gets.chomp)
+  end
+end
+
+interactive_menu
+
+def process(selection)
+  case selection
+    when "1"
+      input_students
+    when "2"
+      show_students
+    when "9"
+      exit
+    else
+    puts "I don't know what you mean, try again"
+  end
+end
+
+def show_students
+  print_header
+  print_students_list
+  print_footer
+end
