@@ -25,9 +25,9 @@ def input_students
   end
 end
 
-def print_students_list(students)
-  students.each_with_index do |student, index|
-      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]})"
+def print_students_list
+  students.each do |student|
+      puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
@@ -53,7 +53,7 @@ end
 def interactive_menu
   loop do
     print_menu
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
   end
 end
 
@@ -88,7 +88,7 @@ def show_students
   print_footer(@students)
 end
 
-def load_students
+def load_students(filename = "students.csv")
   file = File.open("students.csv", "r")
   file.readlines.each do |line|
     name, cohort = line.chomp.split(',')
@@ -97,6 +97,17 @@ def load_students
   file.close
 end
 
-interactive_menu
+def try_load_students
+  filename = ARGV.first
+  return if filename.nil?
+  if File.exists?(filename)
+    load_students(filename)
+    puts "Loaded #{@studets.count} from #{filename}"
+  else
+    puts "Sorry, #{filename} doesn't exist."
+    exit
+  end
+end
 
-file.puts "This written to a file"
+try_load_students
+interactive_menu
